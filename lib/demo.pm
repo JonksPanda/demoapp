@@ -14,7 +14,7 @@ our $dbi = DBI->connect(
 
 # Try to create our table, just ignore any problems (such as it already existing).
 eval {
-    $dbi->do(q[CREATE TABLE demodata (address varchar, uri varchar, tstamp integer)]);
+    $dbi->do(q[CREATE TABLE demodata (address varchar(255), uri varchar(255), tstamp integer)]);
 };
 
 my $store_sth = $dbi->prepare(q[INSERT INTO demodata VALUES (?,?,?)]);
