@@ -12,6 +12,8 @@ our $dbi = DBI->connect(
                         {RaiseError => 1, PrintError => 0}
                        ) or die $DBI::errstr;
 
+$dbi->{mysql_auto_reconnect} = 1;
+
 # Try to create our table, just ignore any problems (such as it already existing).
 eval {
     $dbi->do(q[CREATE TABLE demodata (address varchar(255), uri varchar(255), tstamp integer)]);
