@@ -9,9 +9,10 @@ our $dbi = DBI->connect(
                         config->{dbconnect},
                         config->{dbuser},
                         config->{dbpass},
-                        {RaiseError => 1, PrintError => 0}, 
-                        mysql_auto_reconnect=1
+                        {RaiseError => 1, PrintError => 0}
                        ) or die $DBI::errstr;
+
+$dbi->{mysql_auto_reconnect} = 1;
 
 # Try to create our table, just ignore any problems (such as it already existing).
 eval {
