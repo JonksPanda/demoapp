@@ -22,7 +22,7 @@ my $store_sth = $dbi->prepare(q[INSERT INTO demodata VALUES (?,?,?)]);
 my $fetch_sth = $dbi->prepare(q[SELECT address, uri, tstamp FROM demodata ORDER BY tstamp DESC LIMIT 100]);
 
 get qr{/(.*)} => sub {
-    $store_sth->execute(request->headers->header('X-Forwarded-For'), request->uri, time());
+    $store_sth->execute(request->address, request->uri, time());
     my $data = $dbi->selectall_arrayref($fetch_sth);
     for my $row (@$data) {
         # Convert time_t value to readable string
